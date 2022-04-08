@@ -1,0 +1,43 @@
+{
+  "name": "@django-wong/homebridge-xiaomi",
+  "version": "0.0.1",
+  "description": "Homebridge plugin for all your miot compatible devices with (alomost) zero configuration",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/django-wong/homebridge-xiaomi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/django-wong/homebridge-xiaomi/issues"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "tsc",
+    "watch": "tsc --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=14.18.1",
+    "homebridge": ">=1.3.4"
+  },
+  "dependencies": {
+    "debounce": "^1.2.1",
+    "node-fetch": "^2.6.1",
+    "randomstring": "^1.2.1"
+  },
+  "devDependencies": {
+    "node-mihome": "^0.0.32",
+    "@types/debounce": "^1.2.1",
+    "@types/node": "^16.6.1",
+    "@types/node-fetch": "^2.5.12",
+    "@types/randomstring": "^1.1.7",
+    "homebridge": "^1.3.8",
+    "typescript": "^4.6.3"
+  },
+  "keywords": [
+    "homebridge-plugin"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}

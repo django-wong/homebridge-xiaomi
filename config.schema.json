@@ -1,0 +1,43 @@
+{
+  "pluginAlias": "MiCloud",
+  "pluginType": "platform",
+  "singular": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "username": {
+        "title": "Username",
+        "type": "string",
+        "required": true,
+        "default": ""
+      },
+      "password":  {
+        "title": "Password",
+        "type": "string",
+        "require": true,
+        "default": ""
+      },
+      "devices":  {
+        "title": "Devices",
+        "type": "array",
+        "require": true,
+        "items": {
+          "title": "Devices did",
+          "type": "string"
+        },
+        "description": "Devices to enable"
+      },
+      "country": {
+        "title": "Country",
+        "type": "string",
+        "require": true,
+        "default": "cn",
+        "typeahead": {
+          "source": [
+            "ru", "us", "tw", "sg", "cn", "de", "in", "i2"
+          ]
+        }
+      }
+    }
+  }
+}
