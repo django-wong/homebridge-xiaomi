@@ -1,9 +1,5 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const abstract_1 = __importDefault(require("./service/abstract"));
 const service_1 = require("./service");
 class Accessory {
     constructor(device, accessory, api, log) {
@@ -48,7 +44,7 @@ class Accessory {
         return this.accessory;
     }
     ofService(name) {
-        return this.services.find(service => service instanceof abstract_1.default);
+        return this.services.find(service => service instanceof name);
     }
 }
 exports.default = Accessory;

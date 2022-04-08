@@ -54,6 +54,6 @@ export default class Accessory {
     }
 
     ofService(name: typeof AbstractService) {
-        return this.services.find(service => service instanceof AbstractService);
+        return this.services.find(service => service instanceof name);
     }
 }
