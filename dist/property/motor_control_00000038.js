@@ -24,10 +24,10 @@ class Motor_control_00000038 extends abstract_1.default {
         });
     }
     createService(item) {
-        const serviceCons = this.service.hap.Service.Switch;
-        let service = this.service.getPlatformAccessory().getServiceById(serviceCons, item.value.toString());
+        const SERVICE = this.service.hap.Service.Switch;
+        let service = this.service.getPlatformAccessory().getServiceById(SERVICE, item.value.toString());
         if (!service) {
-            service = this.service.getPlatformAccessory().addService(serviceCons, item.description, item.value.toString());
+            service = this.service.getPlatformAccessory().addService(SERVICE, item.description, item.value.toString());
         }
         let active = false;
         const characteristic = service.getCharacteristic(this.Characteristic.On).onGet(() => {
@@ -37,22 +37,17 @@ class Motor_control_00000038 extends abstract_1.default {
                 active = bool;
                 if (active) {
                     await this.setPropertyValue(item.value);
-                    await this.reset();
-                }
-                else {
-                    await this.setPropertyValue(0);
+                    this.resetExcept(service);
                 }
             }
             return active;
         });
-        service.getCharacteristic(this.Characteristic.ActiveIdentifier).onGet(() => {
-            return item.value;
-        });
         this.switches.push([service, characteristic]);
     }
-    reset() {
+    resetExcept(except) {
         this.switches.forEach(([service, characteristic]) => {
-            characteristic.setValue(false);
+            if (service != except)
+                characteristic.setValue(false);
         });
     }
 }

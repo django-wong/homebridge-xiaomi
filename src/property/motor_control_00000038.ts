@@ -23,11 +23,11 @@ export class Motor_control_00000038 extends AbstractProperty {
 
 
     createService(item: MiIOSpec.PossibleValue) {
-        const serviceCons = this.service.hap.Service.Switch;
-        let service = this.service.getPlatformAccessory().getServiceById(serviceCons, item.value.toString());
+        const SERVICE = this.service.hap.Service.Switch;
+        let service = this.service.getPlatformAccessory().getServiceById(SERVICE, item.value.toString());
         if (!service) {
             service = this.service.getPlatformAccessory().addService(
-                serviceCons, item.description, item.value.toString()
+                SERVICE, item.description, item.value.toString()
             );
         }
 
@@ -43,27 +43,19 @@ export class Motor_control_00000038 extends AbstractProperty {
                     active = bool;
                     if (active) {
                         await this.setPropertyValue(item.value);
-                        await this.reset();
-                    } else {
-                        await this.setPropertyValue(0);
+                        this.resetExcept(service);
                     }
                 }
                 return active;
             }
         )
 
-        service.getCharacteristic(this.Characteristic.ActiveIdentifier).onGet(
-            () => {
-                return item.value;
-            }
-        )
-
         this.switches.push([service, characteristic]);
     }
 
-    private reset() {
+    private resetExcept(except: Service | undefined) {
         this.switches.forEach(([service, characteristic]) => {
-            characteristic.setValue(false);
+            if (service != except) characteristic.setValue(false);
         })
     }
 }

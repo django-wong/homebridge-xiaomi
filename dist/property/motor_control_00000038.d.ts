@@ -6,5 +6,5 @@ export declare class Motor_control_00000038 extends AbstractProperty {
     urn(): string;
     init(): void;
     createService(item: MiIOSpec.PossibleValue): void;
-    private reset;
+    private resetExcept;
 }

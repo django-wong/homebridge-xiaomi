@@ -1,4 +1,3 @@
-import { Current_time } from "../property/current_time";
 import { Motor_control_00000038 } from "../property/motor_control_00000038";
 import AbstractService, {AnyHBService, Property} from "./abstract";
 
