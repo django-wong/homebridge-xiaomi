@@ -18,7 +18,7 @@ export class CurrentHumidifierDehumidifierOn extends AbstractProperty {
 				}
         	}
         ).setProps({
-        	minValue: 2,
+        	minValue: 0,
         	maxValue: 2,
 			minStep: 1
         })
