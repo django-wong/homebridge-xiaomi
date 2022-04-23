@@ -10,8 +10,9 @@ const battery_1 = require("./battery");
 const air_purifier_1 = require("./air_purifier");
 const airer_1 = require("./airer");
 const speaker_1 = require("./speaker");
+const humidifier_1 = require("./humidifier");
 const Services = [
-    device_information_1.DeviceInformation, air_conditioner_1.AirConditioner, light_1.Light, environment_1.Environment, fan_control_1.FanControl, battery_1.Battery, air_purifier_1.AirPurifier, airer_1.Airer, speaker_1.Speaker
+    device_information_1.DeviceInformation, air_conditioner_1.AirConditioner, light_1.Light, environment_1.Environment, fan_control_1.FanControl, battery_1.Battery, air_purifier_1.AirPurifier, airer_1.Airer, speaker_1.Speaker, humidifier_1.Humidifier
 ];
 function isEqual(left, right) {
     return left === right;

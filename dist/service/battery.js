@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Battery = void 0;
 const battery_level_00000014_1 = require("../property/battery_level_00000014");
 const abstract_1 = __importDefault(require("./abstract"));
+const battery_level_low_00000014_1 = require("../property/battery_level_low_00000014");
 class Battery extends abstract_1.default {
     urn() {
         return Battery.urn;
@@ -15,6 +16,7 @@ class Battery extends abstract_1.default {
     }
     getRequiredProperties() {
         return [
+            battery_level_low_00000014_1.Battery_level_low_00000014,
             battery_level_00000014_1.Battery_level_00000014
         ];
     }
