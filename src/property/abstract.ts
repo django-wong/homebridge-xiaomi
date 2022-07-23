@@ -8,6 +8,18 @@ export type AnyHbCharacteristic = WithUUID<{
     new (): Characteristic;
 }>
 
+export abstract class DynamicProperty {
+    constructor(protected service: Service) {}
+
+    get Characteristic() {
+        return this.service.hap.Characteristic;
+    }
+
+    abstract urn(): string;
+
+    abstract init(): void;
+}
+
 export default abstract class AbstractProperty<T extends PrimitiveValue = PrimitiveValue> {
     constructor(protected service: Service, protected propertyDefinition?: InstanceProperty) {}
 

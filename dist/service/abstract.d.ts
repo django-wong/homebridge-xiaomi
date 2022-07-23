@@ -22,6 +22,7 @@ export default abstract class AbstractService {
     properties: AbstractProperty[];
     constructor(accessory: Accessory, device: Device, api: API, serviceDefinition: InstanceService, services: AbstractService[]);
     abstract urn(): string;
+    getDevice(): Device;
     getAccessory(): Accessory;
     getPlatformAccessory(): PlatformAccessory<AccessoryContext>;
     getRequiredProperties(): Array<Property>;

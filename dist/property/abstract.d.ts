@@ -6,6 +6,13 @@ import { WithUUID } from "hap-nodejs/dist/types";
 export declare type AnyHbCharacteristic = WithUUID<{
     new (): Characteristic;
 }>;
+export declare abstract class DynamicProperty {
+    protected service: Service;
+    constructor(service: Service);
+    get Characteristic(): typeof Characteristic;
+    abstract urn(): string;
+    abstract init(): void;
+}
 export default abstract class AbstractProperty<T extends PrimitiveValue = PrimitiveValue> {
     protected service: Service;
     protected propertyDefinition?: InstanceProperty | undefined;

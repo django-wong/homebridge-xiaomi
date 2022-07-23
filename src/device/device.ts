@@ -332,6 +332,12 @@ export default abstract class Device extends AbstractDevice {
 		});
 	}
 
+	public findServiceAction(service: InstanceService, type: string) {
+		return service.actions?.find((action) => {
+			return action.type.indexOf(type) != -1 || action.type.split(':')[4] == type;
+		});
+	}
+
 	/**
 	 * Get all readable properties
 	 *

@@ -5,4 +5,5 @@ export declare class Humidifier extends AbstractService {
     getHbService(): AnyHBService;
     getRequiredProperties(): Array<Property>;
     getDynamicProperties(): Array<Property>;
+    getOptionalProperties(): Property[];
 }

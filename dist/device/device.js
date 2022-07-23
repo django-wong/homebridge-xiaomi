@@ -305,6 +305,12 @@ class Device extends abstract_1.default {
             return property.type.indexOf(type) != -1 || property.type.split(':')[4] == type;
         });
     }
+    findServiceAction(service, type) {
+        var _a;
+        return (_a = service.actions) === null || _a === void 0 ? void 0 : _a.find((action) => {
+            return action.type.indexOf(type) != -1 || action.type.split(':')[4] == type;
+        });
+    }
     /**
      * Get all readable properties
      *

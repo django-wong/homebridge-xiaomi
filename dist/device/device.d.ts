@@ -137,6 +137,7 @@ export default abstract class Device extends AbstractDevice {
      * @param type Can be either property urn or short id
      */
     findServiceProperty(service: InstanceService, type: string): MiIOSpec.InstanceProperty | undefined;
+    findServiceAction(service: InstanceService, type: string): MiIOSpec.InstanceAction | undefined;
     /**
      * Get all readable properties
      *

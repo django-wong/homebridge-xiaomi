@@ -7,6 +7,7 @@ import {Service} from "homebridge";
 import {Humidity} from "./environment/humidity";
 import PrimitiveValue = MiIOSpec.PrimitiveValue;
 import {Relative_humidity_0000000C} from "../property/relative_humidity_0000000C";
+import { Rotation_speed_00000016 } from "../property/rotation_speed_00000016";
 
 class CurrentHumidity extends Relative_humidity_0000000C {
     async getPropertyValue(defaultValue: Nullable<number> = null): Promise<Nullable<number>> {
@@ -40,5 +41,11 @@ export class Humidifier extends AbstractService {
     getDynamicProperties(): Array<Property> {
         const propertis = super.getDynamicProperties();
         return [...propertis, CurrentHumidity];
+    }
+
+    getOptionalProperties(): Property[] {
+        return [
+            Rotation_speed_00000016
+        ];
     }
 }

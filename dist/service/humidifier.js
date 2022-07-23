@@ -10,6 +10,7 @@ const current_humidifier_dehumidifier_on_1 = require("../property/current_humidi
 const target_humidifier_dehumidifier_state_on_1 = require("../property/target_humidifier_dehumidifier_state_on");
 const humidity_1 = require("./environment/humidity");
 const relative_humidity_0000000C_1 = require("../property/relative_humidity_0000000C");
+const rotation_speed_00000016_1 = require("../property/rotation_speed_00000016");
 class CurrentHumidity extends relative_humidity_0000000C_1.Relative_humidity_0000000C {
     async getPropertyValue(defaultValue = null) {
         const service = this.service.getAccessory().ofService(humidity_1.Humidity);
@@ -36,6 +37,11 @@ class Humidifier extends abstract_1.default {
     getDynamicProperties() {
         const propertis = super.getDynamicProperties();
         return [...propertis, CurrentHumidity];
+    }
+    getOptionalProperties() {
+        return [
+            rotation_speed_00000016_1.Rotation_speed_00000016
+        ];
     }
 }
 exports.Humidifier = Humidifier;

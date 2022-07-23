@@ -243,4 +243,4 @@ export declare const Devices: {
     WindowOpener: typeof WindowOpener;
     WineTank: typeof WineTank;
 };
-export declare function findDriverForMiotDevice(device: MiotDevice): typeof AirConditioner | undefined;
+export declare function findDriverForMiotDevice(device: MiotDevice): typeof WineTank | undefined;

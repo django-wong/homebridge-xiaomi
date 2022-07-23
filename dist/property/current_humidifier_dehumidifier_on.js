@@ -16,10 +16,10 @@ class CurrentHumidifierDehumidifierOn extends abstract_1.default {
                 return this.Characteristic.CurrentHumidifierDehumidifierState.HUMIDIFYING;
             }
             else {
-                return this.Characteristic.CurrentHumidifierDehumidifierState.INACTIVE;
+                return this.Characteristic.CurrentHumidifierDehumidifierState.IDLE;
             }
         }).setProps({
-            minValue: 0,
+            minValue: 1,
             maxValue: 2,
             minStep: 1
         });

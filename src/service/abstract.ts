@@ -63,6 +63,10 @@ export default abstract class AbstractService {
 
     abstract urn(): string;
 
+    getDevice() {
+        return this.device;
+    }
+
     getAccessory() {
         return this.accessory;
     }
@@ -154,6 +158,7 @@ export default abstract class AbstractService {
         return this.siid.toString();
     }
 
+    // The hap service.
     getService() {
         let service = this.getPlatformAccessory().getServiceById(this.getHbService(), this.subType);
         if (!service) {

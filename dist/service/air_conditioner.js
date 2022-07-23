@@ -9,6 +9,7 @@ const heating_cooling_state_00000008_1 = require("../property/heating_cooling_st
 const target_temperature_00000021_1 = require("../property/target_temperature_00000021");
 const environment_1 = require("./environment");
 const current_temperature_00000020_1 = require("../property/current_temperature_00000020");
+const eco_1 = require("../property/eco");
 function modeToHeatingCoolingState(mode) {
     if (mode == null) {
         return 0; // 0: OFF, 1: HEAT, 2: COOL, 3: AUTO
@@ -30,36 +31,16 @@ class AirConditioner extends abstract_1.default {
             target_temperature_00000021_1.Target_temperature_00000021,
         ];
     }
+    getOptionalProperties() {
+        return [
+            eco_1.ECO
+        ];
+    }
     initialize() {
         this._currentTemperature();
         this._temperatureDisplayUnits();
         this._cooling_threshold_temperature();
         this._heating_threshold_temperature();
-    }
-    async _setTargetHeatingCoolingState(value) {
-        switch (value) {
-            case this.hap.Characteristic.TargetHeatingCoolingState.OFF:
-                await this.setPropertyValue('urn:miot-spec-v2:property:on:00000006', false);
-                break;
-            case this.hap.Characteristic.TargetHeatingCoolingState.AUTO:
-                await this.setPropertiesValue({
-                    'urn:miot-spec-v2:property:on:00000006': true,
-                    'urn:miot-spec-v2:property:mode:00000008': this.lastKnownState || 2
-                });
-                break;
-            case this.hap.Characteristic.TargetHeatingCoolingState.COOL:
-                await this.setPropertiesValue({
-                    'urn:miot-spec-v2:property:on:00000006': true,
-                    'urn:miot-spec-v2:property:mode:00000008': 2
-                });
-                break;
-            case this.hap.Characteristic.TargetHeatingCoolingState.HEAT:
-                await this.setPropertiesValue({
-                    'urn:miot-spec-v2:property:on:00000006': true,
-                    'urn:miot-spec-v2:property:mode:00000008': 1
-                });
-                break;
-        }
     }
     async isOn() {
         const res = await this.getPropertyValue('urn:miot-spec-v2:property:on:00000006');
@@ -107,21 +88,3 @@ class AirConditioner extends abstract_1.default {
 }
 exports.AirConditioner = AirConditioner;
 AirConditioner.urn = "urn:miot-spec-v2:service:air-conditioner:0000780F";
-// export class AirConditioner extends AbstractService {
-//     static type = "urn:miot-spec-v2:service:air-conditioner:0000780F"
-//
-//     getHbService(): typeof Service {
-//         return this.hap.Service.HeaterCooler;
-//     }
-//
-//     getType(): string {
-//         return AirConditioner.type;
-//     }
-//
-//     getRequiredProperties(): Array<Property> {
-//         return [
-//             Active_00000006,
-//             Heater_cooler_state_00000008
-//         ];
-//     }
-// }

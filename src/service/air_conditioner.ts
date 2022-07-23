@@ -7,6 +7,7 @@ import {Environment} from "./environment";
 import {CurrentTemperature_00000020} from "../property/current_temperature_00000020";
 import {Active_00000006} from "../property/active_00000006";
 import {Heater_cooler_state_00000008} from "../property/heater_cooler_state_00000008";
+import { ECO } from "../property/eco";
 
 export function modeToHeatingCoolingState(mode: Nullable<number>) {
     if (mode == null) {
@@ -38,39 +39,17 @@ export class AirConditioner extends AbstractService {
         ]
     }
 
+    getOptionalProperties(): Property[] {
+        return [
+            ECO
+        ]
+    }
+
     initialize() {
         this._currentTemperature();
         this._temperatureDisplayUnits();
         this._cooling_threshold_temperature();
         this._heating_threshold_temperature();
-    }
-
-    async _setTargetHeatingCoolingState(value: CharacteristicValue) {
-        switch (value) {
-        case this.hap.Characteristic.TargetHeatingCoolingState.OFF:
-            await this.setPropertyValue(
-                'urn:miot-spec-v2:property:on:00000006', false
-            )
-            break;
-        case this.hap.Characteristic.TargetHeatingCoolingState.AUTO:
-            await this.setPropertiesValue({
-                'urn:miot-spec-v2:property:on:00000006': true,
-                'urn:miot-spec-v2:property:mode:00000008': this.lastKnownState || 2
-            });
-            break;
-        case this.hap.Characteristic.TargetHeatingCoolingState.COOL:
-            await this.setPropertiesValue({
-                'urn:miot-spec-v2:property:on:00000006': true,
-                'urn:miot-spec-v2:property:mode:00000008': 2
-            });
-            break;
-        case this.hap.Characteristic.TargetHeatingCoolingState.HEAT:
-            await this.setPropertiesValue({
-                'urn:miot-spec-v2:property:on:00000006': true,
-                'urn:miot-spec-v2:property:mode:00000008': 1
-            });
-            break;
-        }
     }
 
 
@@ -137,23 +116,3 @@ export class AirConditioner extends AbstractService {
         // })
     }
 }
-
-
-// export class AirConditioner extends AbstractService {
-//     static type = "urn:miot-spec-v2:service:air-conditioner:0000780F"
-//
-//     getHbService(): typeof Service {
-//         return this.hap.Service.HeaterCooler;
-//     }
-//
-//     getType(): string {
-//         return AirConditioner.type;
-//     }
-//
-//     getRequiredProperties(): Array<Property> {
-//         return [
-//             Active_00000006,
-//             Heater_cooler_state_00000008
-//         ];
-//     }
-// }

@@ -35,6 +35,9 @@ class AbstractService {
         this.initialize();
         this.init();
     }
+    getDevice() {
+        return this.device;
+    }
     getAccessory() {
         return this.accessory;
     }
@@ -110,6 +113,7 @@ class AbstractService {
     get subType() {
         return this.siid.toString();
     }
+    // The hap service.
     getService() {
         let service = this.getPlatformAccessory().getServiceById(this.getHbService(), this.subType);
         if (!service) {
