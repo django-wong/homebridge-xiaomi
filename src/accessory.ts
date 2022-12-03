@@ -49,6 +49,10 @@ export default class Accessory {
         return this.services;
     }
 
+    getService(service: typeof AbstractService) {
+        return this.services.find(item => item instanceof service);
+    }
+
     getPlatformAccessory() {
         return this.accessory;
     }

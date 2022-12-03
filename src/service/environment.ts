@@ -31,12 +31,16 @@ export class Environment extends AbstractService {
     // }
 
     initialize() {
-        const services = [Humidity, Temperature].map(
-            (Service) => {
-                return new Service(this.accessory, this.device, this.api, this.serviceDefinition, this.services);
-            }
-        );
+        if (this.hasProperty('urn:miot-spec-v2:property:relative-humidity:0000000C')) {
+            this.services.push(
+                new Humidity(this.accessory, this.device, this.api, this.serviceDefinition, this.services)
+            )
+        }
 
-        this.services.push(...services);
+        if (this.hasProperty('urn:miot-spec-v2:property:temperature:00000020')) {
+            this.services.push(
+                new Temperature(this.accessory, this.device, this.api, this.serviceDefinition, this.services)
+            )
+        }
     }
 }

@@ -11,10 +11,10 @@ import {Airer} from "./airer";
 import {Speaker} from "./speaker";
 import {Service} from "./abstract";
 import {Humidifier} from "./humidifier";
-
+import {Heater} from './heater';
 
 const Services: Service[] = [
-    DeviceInformation, AirConditioner, Light, Environment, FanControl, Battery, AirPurifier, Airer, Speaker, Humidifier
+    DeviceInformation, AirConditioner, Light, Environment, FanControl, Battery, AirPurifier, Airer, Speaker, Humidifier, Heater
 ]
 
 function isEqual(left: any, right: any) {

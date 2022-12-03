@@ -40,6 +40,9 @@ class Accessory {
     getServices() {
         return this.services;
     }
+    getService(service) {
+        return this.services.find(item => item instanceof service);
+    }
     getPlatformAccessory() {
         return this.accessory;
     }

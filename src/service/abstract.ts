@@ -50,14 +50,13 @@ export default abstract class AbstractService {
     properties: AbstractProperty[] = [];
 
     constructor(
-        // protected accessory: PlatformAccessory<AccessoryContext>, 
+        // protected accessory: PlatformAccessory<AccessoryContext>,
         protected accessory: Accessory,
-        protected device: Device, 
-        protected api: API, 
-        protected serviceDefinition: InstanceService, 
+        protected device: Device,
+        protected api: API,
+        protected serviceDefinition: InstanceService,
         protected services: AbstractService[]
     ) {
-        this.initialize();
         this.init();
     }
 
@@ -91,6 +90,7 @@ export default abstract class AbstractService {
     }
 
     init() {
+        this.initialize();
         this._initRequiredProperties();
         this._initOptionalProperties();
         this._initDynamicProperties();

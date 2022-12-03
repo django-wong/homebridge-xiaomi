@@ -14,6 +14,7 @@ export default class Accessory {
     init(): Promise<void>;
     createService(definition: InstanceService): void;
     getServices(): AbstractService[];
+    getService(service: typeof AbstractService): AbstractService | undefined;
     getPlatformAccessory(): PlatformAccessory<AccessoryContext>;
     ofService(name: typeof AbstractService): AbstractService | undefined;
 }

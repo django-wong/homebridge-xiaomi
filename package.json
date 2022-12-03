@@ -1,7 +1,7 @@
 {
   "name": "@django-wong/homebridge-xiaomi",
-  "version": "0.0.3",
-  "description": "Homebridge plugin for all your miot compatible devices with (alomost) zero configuration",
+  "version": "0.0.4",
+  "description": "Homebridge plugin for your miot compatible devices with (almost) zero configuration",
   "repository": {
     "type": "git",
     "url": "git://github.com/django-wong/homebridge-xiaomi.git"

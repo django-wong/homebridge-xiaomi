@@ -22,7 +22,7 @@ function urn(property) {
 // RequiredProperties
 class AbstractService {
     constructor(
-    // protected accessory: PlatformAccessory<AccessoryContext>, 
+    // protected accessory: PlatformAccessory<AccessoryContext>,
     accessory, device, api, serviceDefinition, services) {
         this.accessory = accessory;
         this.device = device;
@@ -32,7 +32,6 @@ class AbstractService {
         // [REQUIRED_PROPERTIES] = [];
         // [OPTIONAL_PROPERTIES] = [];
         this.properties = [];
-        this.initialize();
         this.init();
     }
     getDevice() {
@@ -56,6 +55,7 @@ class AbstractService {
         ];
     }
     init() {
+        this.initialize();
         this._initRequiredProperties();
         this._initOptionalProperties();
         this._initDynamicProperties();

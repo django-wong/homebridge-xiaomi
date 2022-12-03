@@ -82,7 +82,6 @@ export class AirConditioner extends AbstractService {
                 if (environmentService) {
                     value = await environmentService.getPropertyValue<number>(CurrentTemperature_00000020)
                 }
-                console.info(`current temperature is ${value}`);
                 return value;
             }
         )

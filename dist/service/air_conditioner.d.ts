@@ -1,6 +1,6 @@
 import AbstractService, { Property } from "./abstract";
 import { Nullable } from "homebridge";
-export declare function modeToHeatingCoolingState(mode: Nullable<number>): 1 | 2 | 0;
+export declare function modeToHeatingCoolingState(mode: Nullable<number>): 0 | 2 | 1;
 export declare class AirConditioner extends AbstractService {
     urn(): string;
     static urn: string;

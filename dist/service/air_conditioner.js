@@ -61,7 +61,6 @@ class AirConditioner extends abstract_1.default {
             if (environmentService) {
                 value = await environmentService.getPropertyValue(current_temperature_00000020_1.CurrentTemperature_00000020);
             }
-            console.info(`current temperature is ${value}`);
             return value;
         });
     }
