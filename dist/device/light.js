@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class Light extends device_1.default {
 }
-exports.default = Light;
 Light.type = 'urn:miot-spec-v2:device:light:0000A001';
+exports.default = Light;

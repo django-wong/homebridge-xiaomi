@@ -1,4 +1,4 @@
-import AbstractService, {AnyHBService, Property} from "../abstract";
+import AbstractService, {AnyHBService} from "../abstract";
 import {CurrentTemperature_00000020} from "../../property/current_temperature_00000020";
 
 export class Temperature extends AbstractService {
@@ -10,7 +10,7 @@ export class Temperature extends AbstractService {
         return "";
     }
 
-    getOptionalProperties(): Array<Property> {
+    getOptionalProperties() {
         return [
             CurrentTemperature_00000020
         ]

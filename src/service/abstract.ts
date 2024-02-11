@@ -5,12 +5,16 @@ import PrimitiveValue = MiIOSpec.PrimitiveValue;
 import InstanceProperty = MiIOSpec.InstanceProperty;
 
 import {Serial_number_00000003} from "../property/serial_number_00000003";
-import AbstractProperty from "../property/abstract";
+import AbstractProperty, {
+    DynamicProperty,
+    Property
+} from "../property/abstract";
 import {type} from "os";
 import {WithUUID} from "hap-nodejs/dist/types";
 import { Device as AccessoryContext } from '../lib/micloud';
 import {Name_unknown} from "../property/name_unknown";
 import Accessory from "../accessory";
+import {throws} from "node:assert";
 // import {OPTIONAL_PROPERTIES, REQUIRED_PROPERTIES, RequiredProperties} from "../lib/decorator";
 
 // export declare class AnyService extends Service {
@@ -20,25 +24,29 @@ import Accessory from "../accessory";
 
 export type AnyHBService = WithUUID<typeof HomeBridgeService>;
 
-export type Property = {
-    urn: string
-    new (...args: any[]): AbstractProperty
-}
+// export type Property = {
+//     urn: string
+//     new (...args: any[]): DynamicProperty
+// }
 
-type PropertyLike = string | AbstractProperty | Property;
+type PropertyLike = string | AbstractProperty | typeof AbstractProperty;
 
 function urn(property: PropertyLike) {
     let propertyUrn = typeof property === 'string' ? property : null;
-    if (property instanceof AbstractProperty) {
+
+
+    if (!propertyUrn && property instanceof AbstractProperty) {
         propertyUrn = property.urn();
     }
-    if (typeof property == 'function') {
-        propertyUrn = property.urn;
+
+    if (!propertyUrn && (property as any).urn) {
+        propertyUrn = (property as any).urn;
     }
+
     if (!propertyUrn) {
-        console.error(property);
-        throw new Error('invalid urn');
+        throw new Error('Invalid property, expected string or AbstractProperty instance or constructor.');
     }
+
     return propertyUrn;
 }
 
@@ -47,7 +55,7 @@ export default abstract class AbstractService {
     // [REQUIRED_PROPERTIES] = [];
     // [OPTIONAL_PROPERTIES] = [];
 
-    properties: AbstractProperty[] = [];
+    properties: Property<any>[] = [];
 
     constructor(
         // protected accessory: PlatformAccessory<AccessoryContext>,
@@ -75,15 +83,15 @@ export default abstract class AbstractService {
     }
 
 
-    getRequiredProperties(): Array<Property> {
+    getRequiredProperties(): Array<typeof AbstractProperty> {
         return [];
     }
 
-    getOptionalProperties(): Array<Property> {
+    getOptionalProperties(): Array<typeof AbstractProperty> {
         return [];
     }
 
-    getDynamicProperties(): Array<Property> {
+    getDynamicProperties(): Array<typeof Property> {
         return [
             Name_unknown
         ];
@@ -91,28 +99,25 @@ export default abstract class AbstractService {
 
     init() {
         this.initialize();
-        this._initRequiredProperties();
-        this._initOptionalProperties();
-        this._initDynamicProperties();
+        this.initRequiredProperties();
+        this.initOptionalProperties();
+        this.initDynamicProperties();
     }
 
-    _initDynamicProperties() {
+    private initDynamicProperties() {
         for (const P of this.getDynamicProperties()) {
             this.addProperty(P);
         }
     }
 
-    addProperty(P: Property, definition?: InstanceProperty) {
+    addProperty(P: any, definition?: InstanceProperty) {
         const property = new P(this, definition);
         property.init();
         this.properties.push(property);
     }
 
-    _initRequiredProperties() {
+    private initRequiredProperties() {
         const properties = this.getRequiredProperties();
-        // if (properties.indexOf(Serial_number_00000003) === -1) {
-        //     properties.unshift(Serial_number_00000003);
-        // }
         for (const P of properties) {
             const definition = this.findProperty(P.urn);
             if (definition) {
@@ -123,7 +128,7 @@ export default abstract class AbstractService {
         }
     }
 
-    _initOptionalProperties() {
+    private initOptionalProperties() {
         const properties = this.getOptionalProperties();
         for (const P of properties) {
             const definition = this.findProperty(P.urn);
@@ -190,7 +195,7 @@ export default abstract class AbstractService {
 
     /**
      * Get property value by URN
-     * @param propertyUrn
+     * @param propertyLike
      * @param defaultValue
      */
     async getPropertyValue<T = PrimitiveValue>(propertyLike: PropertyLike, defaultValue: Nullable<T> = null): Promise<Nullable<T>> {
@@ -212,14 +217,16 @@ export default abstract class AbstractService {
         return value;
     }
 
-    private _buildSetPropertyValueOption(propertyUrn: string, value: PrimitiveValue) {
+    private buildSetPropertyValueOption(propertyUrn: string, value: PrimitiveValue) {
         const property = this.device.findServiceProperty(this.serviceDefinition, propertyUrn)
-        if (!property) {
-            return undefined;
+
+        if (! property) {
+            throw new Error(`Property not found: ${propertyUrn}`);
         }
+
         return {
-            piid: property.iid,
             siid: this.serviceDefinition.iid,
+            piid: property.iid,
             value: value
         };
     }
@@ -231,11 +238,9 @@ export default abstract class AbstractService {
      */
     async setPropertyValue(propertyLike: PropertyLike, value: PrimitiveValue): Promise<void> {
         console.info(`[Set] ${urn(propertyLike)} >> ${value}`);
-        const option = this._buildSetPropertyValueOption(urn(propertyLike), value);
-        if (!option) {
-            return undefined;
-        }
-        const res = await this.device.setProperty(option)
+        const res = await this.device.setProperty(
+            this.buildSetPropertyValueOption(urn(propertyLike), value)
+        )
         return res[0].value;
     }
 
@@ -248,10 +253,10 @@ export default abstract class AbstractService {
 
         Object.keys(urnsValue).forEach(
             (urn) => {
-                const option = this._buildSetPropertyValueOption(
+                const option = this.buildSetPropertyValueOption(
                     urn, urnsValue[urn]
                 )
-                if (option) options.push(option);
+                options.push(option);
             }
         );
 

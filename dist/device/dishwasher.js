@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class Dishwasher extends device_1.default {
 }
-exports.default = Dishwasher;
 Dishwasher.type = 'urn:miot-spec-v2:device:dishwasher:0000A034';
+exports.default = Dishwasher;

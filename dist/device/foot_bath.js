@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class FootBath extends device_1.default {
 }
-exports.default = FootBath;
 FootBath.type = 'urn:miot-spec-v2:device:foot-bath:0000A08D';
+exports.default = FootBath;

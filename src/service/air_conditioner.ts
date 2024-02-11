@@ -1,4 +1,4 @@
-import AbstractService, {Property} from "./abstract";
+import AbstractService from "./abstract";
 import {CharacteristicValue, Nullable, Service} from "homebridge";
 import {On_00000006} from "../property/on_00000006";
 import {Heating_cooling_state_00000008} from "../property/heating_cooling_state_00000008";
@@ -32,14 +32,14 @@ export class AirConditioner extends AbstractService {
         return this.api.hap.Service.Thermostat;
     }
 
-    getRequiredProperties(): Array<Property> {
+    getRequiredProperties() {
         return [
             Heating_cooling_state_00000008,
             Target_temperature_00000021,
         ]
     }
 
-    getOptionalProperties(): Property[] {
+    getOptionalProperties() {
         return [
             ECO
         ]
@@ -48,8 +48,6 @@ export class AirConditioner extends AbstractService {
     initialize() {
         this._currentTemperature();
         this._temperatureDisplayUnits();
-        this._cooling_threshold_temperature();
-        this._heating_threshold_temperature();
     }
 
 
@@ -58,18 +56,6 @@ export class AirConditioner extends AbstractService {
         return res ? res : false;
     }
 
-
-    async _getHeatingCoolingState() {
-        if (!(await this.isOn())) {
-            return this.hap.Characteristic.CurrentHeatingCoolingState.OFF;
-        }
-        this.lastKnownState = modeToHeatingCoolingState(
-            await this.getPropertyValue<number>(
-                'urn:miot-spec-v2:property:mode:00000008'
-            )
-        );
-        return this.lastKnownState;
-    }
 
     _currentTemperature() {
         const service = this.getService();
@@ -97,21 +83,5 @@ export class AirConditioner extends AbstractService {
                 return this.hap.Characteristic.TemperatureDisplayUnits.CELSIUS
             }
         )
-    }
-
-    _heating_threshold_temperature() {
-        // this.getService().getCharacteristic(this.hap.Characteristic.HeatingThresholdTemperature).setProps({
-        //     minStep: 1,
-        //     maxValue: 35,
-        //     minValue: 16
-        // });
-    }
-
-    _cooling_threshold_temperature() {
-        // this.getService().getCharacteristic(this.hap.Characteristic.CoolingThresholdTemperature).setProps({
-        //     minStep: 1,
-        //     maxValue: 30,
-        //     minValue: 16
-        // })
     }
 }

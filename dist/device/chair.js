@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class Chair extends device_1.default {
 }
-exports.default = Chair;
 Chair.type = 'urn:miot-spec-v2:device:chair:0000A0AD';
+exports.default = Chair;

@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class FishTank extends device_1.default {
 }
-exports.default = FishTank;
 FishTank.type = 'urn:miot-spec-v2:device:fish-tank:0000A0A2';
+exports.default = FishTank;

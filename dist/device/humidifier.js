@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class Humidifier extends device_1.default {
 }
-exports.default = Humidifier;
 Humidifier.type = 'urn:miot-spec-v2:device:humidifier:0000A00E';
+exports.default = Humidifier;

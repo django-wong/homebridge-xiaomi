@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class HealthPot extends device_1.default {
 }
-exports.default = HealthPot;
 HealthPot.type = 'urn:miot-spec-v2:device:health-pot:0000A051';
+exports.default = HealthPot;

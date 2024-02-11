@@ -33,7 +33,7 @@ var DeviceEvent;
 (function (DeviceEvent) {
     DeviceEvent["INITIALIZED"] = "initialized";
     DeviceEvent["DISPOSED"] = "disposed";
-})(DeviceEvent = exports.DeviceEvent || (exports.DeviceEvent = {}));
+})(DeviceEvent || (exports.DeviceEvent = DeviceEvent = {}));
 /**
  * This class describes a miot-compatible device with a few highlevel method to interacts with the device
  *
@@ -366,5 +366,5 @@ class Device extends abstract_1.default {
         return (_a = this.instanceFeatureDefinition) === null || _a === void 0 ? void 0 : _a.services.map((s) => s);
     }
 }
-exports.default = Device;
 Device.type = 'unknown';
+exports.default = Device;

@@ -8,20 +8,31 @@ export type AnyHbCharacteristic = WithUUID<{
     new (): Characteristic;
 }>
 
-export abstract class DynamicProperty {
-    constructor(protected service: Service) {}
+export abstract class Property<T = any> {
+    constructor(protected service: Service, ...args: any[]) {}
 
     get Characteristic() {
         return this.service.hap.Characteristic;
     }
 
-    abstract urn(): string;
+    getService() {
+        return this.service.getService();
+    }
 
     abstract init(): void;
 }
 
-export default abstract class AbstractProperty<T extends PrimitiveValue = PrimitiveValue> {
-    constructor(protected service: Service, protected propertyDefinition?: InstanceProperty) {}
+
+export abstract class DynamicProperty<T = any> extends Property<T> {
+
+}
+
+export default abstract class AbstractProperty<T = any> extends DynamicProperty<T> {
+    static urn: string;
+
+    constructor(protected service: Service, protected propertyDefinition?: InstanceProperty) {
+        super(service);
+    }
 
     get Characteristic() {
         return this.service.hap.Characteristic;
@@ -35,11 +46,11 @@ export default abstract class AbstractProperty<T extends PrimitiveValue = Primit
         return this.service.getService();
     }
 
-    getPropertyValue(defaultValue: Nullable<T> = null) {
+    getPropertyValue(defaultValue = null) {
         return this.service.getPropertyValue(this.urn(), defaultValue);
     }
 
-    setPropertyValue(value: T) {
+    setPropertyValue(value: any) {
         return this.service.setPropertyValue(this.urn(), value);
     }
 

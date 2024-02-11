@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class RemoteControl extends device_1.default {
 }
-exports.default = RemoteControl;
 RemoteControl.type = 'urn:miot-spec-v2:device:remote-control:0000A021';
+exports.default = RemoteControl;

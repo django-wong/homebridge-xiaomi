@@ -53,7 +53,7 @@ declare namespace MiIOSpec {
 
 	export type PropertyAccess = "read" | "write" | "notify" | string
 
-	export type PrimitiveValue = string | boolean | number
+	export type PrimitiveValue = string | boolean | number | undefined
 
 	export type KnownUnit =
 		"percentage" | "rgb" | "kelvin" | "seconds" | "hours" | "arcdegrees" |

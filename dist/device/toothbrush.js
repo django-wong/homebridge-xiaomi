@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class Toothbrush extends device_1.default {
 }
-exports.default = Toothbrush;
 Toothbrush.type = 'urn:miot-spec-v2:device:toothbrush:0000A07E';
+exports.default = Toothbrush;

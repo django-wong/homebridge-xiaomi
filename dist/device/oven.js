@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class Oven extends device_1.default {
 }
-exports.default = Oven;
 Oven.type = 'urn:miot-spec-v2:device:oven:0000A04E';
+exports.default = Oven;

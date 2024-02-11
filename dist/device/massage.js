@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class Message extends device_1.default {
 }
-exports.default = Message;
 Message.type = 'urn:miot-spec-v2:device:massage:0000A018';
+exports.default = Message;

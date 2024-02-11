@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class GarbageDisposal extends device_1.default {
 }
-exports.default = GarbageDisposal;
 GarbageDisposal.type = 'urn:miot-spec-v2:device:garbage-disposal:0000A0B4';
+exports.default = GarbageDisposal;

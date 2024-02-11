@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class WaterDispenser extends device_1.default {
 }
-exports.default = WaterDispenser;
 WaterDispenser.type = 'urn:miot-spec-v2:device:water-dispenser:0000A0A1';
+exports.default = WaterDispenser;

@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class EngravingMachine extends device_1.default {
 }
-exports.default = EngravingMachine;
 EngravingMachine.type = 'urn:miot-spec-v2:device:engraving-machine:0000A0B1';
+exports.default = EngravingMachine;

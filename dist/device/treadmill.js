@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class Treadmill extends device_1.default {
 }
-exports.default = Treadmill;
 Treadmill.type = 'urn:miot-spec-v2:device:treadmill:0000A035';
+exports.default = Treadmill;

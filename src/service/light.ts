@@ -1,5 +1,5 @@
 // import { Service } from "homebridge";
-import AbstractService, {Property} from "./abstract";
+import AbstractService from "./abstract";
 import {On_00000006} from "../property/on_00000006";
 import {Brightness_0000000D} from "../property/brightness_0000000D";
 import {Color_temperature_0000000F} from "../property/color_temperature_0000000F";
@@ -16,13 +16,13 @@ import {Color_temperature_0000000F} from "../property/color_temperature_0000000F
 export class Light extends AbstractService {
 	static urn = 'urn:miot-spec-v2:service:light:00007802';
 
-    getRequiredProperties(): Array<Property> {
+    getRequiredProperties() {
         return [
             On_00000006
         ];
     }
 
-    getOptionalProperties(): Array<Property> {
+    getOptionalProperties() {
         return [
             Brightness_0000000D,
             Color_temperature_0000000F

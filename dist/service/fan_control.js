@@ -6,10 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FanControl = exports.fanLevelToFanState = exports.onToFanState = exports.onToActive = void 0;
 const abstract_1 = __importDefault(require("./abstract"));
 const rotation_speed_00000016_1 = require("../property/rotation_speed_00000016");
-const vertical_swing_00000018_1 = require("../property/vertical_swing_00000018");
-const horizontal_swing_00000018_1 = require("../property/horizontal_swing_00000018");
 const name_unknown_1 = require("../property/name_unknown");
 const any_active_1 = require("../property/any_active");
+const horizontal_or_vertical_swing_1 = require("../property/horizontal_or_vertical_swing");
 function onToActive(value) {
     return value ? 1 : 0;
 }
@@ -32,14 +31,13 @@ class FanControl extends abstract_1.default {
     getOptionalProperties() {
         return [
             rotation_speed_00000016_1.Rotation_speed_00000016,
-            vertical_swing_00000018_1.Vertical_swing_00000018,
-            horizontal_swing_00000018_1.Horizontal_swing_00000018
         ];
     }
     getDynamicProperties() {
         return [
             name_unknown_1.Name_unknown,
             any_active_1.AnyActive,
+            horizontal_or_vertical_swing_1.HorizontalOrVerticalSwing
         ];
     }
 }

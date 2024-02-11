@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class ElectricBlanket extends device_1.default {
 }
-exports.default = ElectricBlanket;
 ElectricBlanket.type = 'urn:miot-spec-v2:device:electric-blanket:0000A069';
+exports.default = ElectricBlanket;

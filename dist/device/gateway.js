@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class Gateway extends device_1.default {
 }
-exports.default = Gateway;
 Gateway.type = 'urn:miot-spec-v2:device:gateway:0000A019';
+exports.default = Gateway;

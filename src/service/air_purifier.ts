@@ -1,7 +1,8 @@
 import { CharacteristicValue } from "homebridge";
 import { Active_00000006 } from "../property/active_00000006";
 
-import AbstractService, { AnyHBService, Property } from "./abstract";
+import AbstractService, { AnyHBService } from "./abstract";
+import {Property} from "../property/abstract";
 
 export class AirPurifier extends AbstractService {
 	static urn = 'urn:miot-spec-v2:service:air-purifier:00007811';
@@ -16,7 +17,7 @@ export class AirPurifier extends AbstractService {
         return this.hap.Service.AirPurifier;
     }
 
-    getRequiredProperties(): Property[] {
+    getRequiredProperties() {
         return [
         	Active_00000006,
         ]
@@ -28,8 +29,8 @@ export class AirPurifier extends AbstractService {
     	service.getCharacteristic(this.hap.Characteristic.CurrentAirPurifierState).onGet(
     		async () => {
     			const active = await this.getPropertyValue(Active_00000006);
-    			return active 
-    				? this.hap.Characteristic.CurrentAirPurifierState.PURIFYING_AIR 
+    			return active
+    				? this.hap.Characteristic.CurrentAirPurifierState.PURIFYING_AIR
     				: this.hap.Characteristic.CurrentAirPurifierState.INACTIVE
     		}
     	);
@@ -41,8 +42,8 @@ export class AirPurifier extends AbstractService {
     		}
     	).onGet(
     		() => {
-    			return this.targetAirpurifierState == null 
-    				? this.hap.Characteristic.TargetAirPurifierState.AUTO 
+    			return this.targetAirpurifierState == null
+    				? this.hap.Characteristic.TargetAirPurifierState.AUTO
     				: this.targetAirpurifierState;
     		}
     	)

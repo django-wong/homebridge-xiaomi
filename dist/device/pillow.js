@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class Pillow extends device_1.default {
 }
-exports.default = Pillow;
 Pillow.type = 'urn:miot-spec-v2:device:pillow:0000A0A0';
+exports.default = Pillow;

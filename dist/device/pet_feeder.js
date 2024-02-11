@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class PetFeeder extends device_1.default {
 }
-exports.default = PetFeeder;
 PetFeeder.type = 'urn:miot-spec-v2:device:pet-feeder:0000A06C';
+exports.default = PetFeeder;

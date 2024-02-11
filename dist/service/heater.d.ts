@@ -1,4 +1,5 @@
-import AbstractService, { AnyHBService, Property } from "./abstract";
+import AbstractService, { AnyHBService } from "./abstract";
+import { On_00000006 } from "../property/on_00000006";
 export declare class Heater extends AbstractService {
     getHbService(): AnyHBService;
     static urn: string;
@@ -7,7 +8,7 @@ export declare class Heater extends AbstractService {
      */
     get canActAsThermostat(): boolean;
     urn(): string;
-    getRequiredProperties(): Array<Property>;
+    getRequiredProperties(): (typeof On_00000006)[];
     initialize(): void;
     /**
      * Current and target state can be only HEAT or OFF

@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class PressureCooker extends device_1.default {
 }
-exports.default = PressureCooker;
 PressureCooker.type = 'urn:miot-spec-v2:device:pressure-cooker:0000A04B';
+exports.default = PressureCooker;

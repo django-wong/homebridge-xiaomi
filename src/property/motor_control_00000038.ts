@@ -20,10 +20,11 @@ export class Motor_control_00000038 extends AbstractProperty {
         })
     }
 
-
-
     createService(item: MiIOSpec.PossibleValue) {
         const SERVICE = this.service.hap.Service.Switch;
+        if (! item.value) {
+            throw new Error(`Service has no value: ${Motor_control_00000038.urn}`);
+        }
         let service = this.service.getPlatformAccessory().getServiceById(SERVICE, item.value.toString());
         if (!service) {
             service = this.service.getPlatformAccessory().addService(

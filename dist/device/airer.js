@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class Airer extends device_1.default {
 }
-exports.default = Airer;
 Airer.type = 'urn:miot-spec-v2:device:airer:0000A00D';
+exports.default = Airer;

@@ -39,19 +39,10 @@ class AirConditioner extends abstract_1.default {
     initialize() {
         this._currentTemperature();
         this._temperatureDisplayUnits();
-        this._cooling_threshold_temperature();
-        this._heating_threshold_temperature();
     }
     async isOn() {
         const res = await this.getPropertyValue('urn:miot-spec-v2:property:on:00000006');
         return res ? res : false;
-    }
-    async _getHeatingCoolingState() {
-        if (!(await this.isOn())) {
-            return this.hap.Characteristic.CurrentHeatingCoolingState.OFF;
-        }
-        this.lastKnownState = modeToHeatingCoolingState(await this.getPropertyValue('urn:miot-spec-v2:property:mode:00000008'));
-        return this.lastKnownState;
     }
     _currentTemperature() {
         const service = this.getService();
@@ -69,20 +60,6 @@ class AirConditioner extends abstract_1.default {
         service.getCharacteristic(this.hap.Characteristic.TemperatureDisplayUnits).onGet(() => {
             return this.hap.Characteristic.TemperatureDisplayUnits.CELSIUS;
         });
-    }
-    _heating_threshold_temperature() {
-        // this.getService().getCharacteristic(this.hap.Characteristic.HeatingThresholdTemperature).setProps({
-        //     minStep: 1,
-        //     maxValue: 35,
-        //     minValue: 16
-        // });
-    }
-    _cooling_threshold_temperature() {
-        // this.getService().getCharacteristic(this.hap.Characteristic.CoolingThresholdTemperature).setProps({
-        //     minStep: 1,
-        //     maxValue: 30,
-        //     minValue: 16
-        // })
     }
 }
 exports.AirConditioner = AirConditioner;

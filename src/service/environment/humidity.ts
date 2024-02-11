@@ -1,4 +1,4 @@
-import AbstractService, {AnyHBService, Property} from "../abstract";
+import AbstractService, {AnyHBService} from "../abstract";
 import {Relative_humidity_0000000C} from "../../property/relative_humidity_0000000C";
 
 export class Humidity extends AbstractService {
@@ -10,7 +10,7 @@ export class Humidity extends AbstractService {
         return "";
     }
 
-    getOptionalProperties(): Array<Property> {
+    getOptionalProperties() {
         return [
             Relative_humidity_0000000C
         ]

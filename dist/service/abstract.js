@@ -7,15 +7,14 @@ const abstract_1 = __importDefault(require("../property/abstract"));
 const name_unknown_1 = require("../property/name_unknown");
 function urn(property) {
     let propertyUrn = typeof property === 'string' ? property : null;
-    if (property instanceof abstract_1.default) {
+    if (!propertyUrn && property instanceof abstract_1.default) {
         propertyUrn = property.urn();
     }
-    if (typeof property == 'function') {
+    if (!propertyUrn && property.urn) {
         propertyUrn = property.urn;
     }
     if (!propertyUrn) {
-        console.error(property);
-        throw new Error('invalid urn');
+        throw new Error('Invalid property, expected string or AbstractProperty instance or constructor.');
     }
     return propertyUrn;
 }
@@ -56,11 +55,11 @@ class AbstractService {
     }
     init() {
         this.initialize();
-        this._initRequiredProperties();
-        this._initOptionalProperties();
-        this._initDynamicProperties();
+        this.initRequiredProperties();
+        this.initOptionalProperties();
+        this.initDynamicProperties();
     }
-    _initDynamicProperties() {
+    initDynamicProperties() {
         for (const P of this.getDynamicProperties()) {
             this.addProperty(P);
         }
@@ -70,11 +69,8 @@ class AbstractService {
         property.init();
         this.properties.push(property);
     }
-    _initRequiredProperties() {
+    initRequiredProperties() {
         const properties = this.getRequiredProperties();
-        // if (properties.indexOf(Serial_number_00000003) === -1) {
-        //     properties.unshift(Serial_number_00000003);
-        // }
         for (const P of properties) {
             const definition = this.findProperty(P.urn);
             if (definition) {
@@ -85,7 +81,7 @@ class AbstractService {
             }
         }
     }
-    _initOptionalProperties() {
+    initOptionalProperties() {
         const properties = this.getOptionalProperties();
         for (const P of properties) {
             const definition = this.findProperty(P.urn);
@@ -138,7 +134,7 @@ class AbstractService {
     }
     /**
      * Get property value by URN
-     * @param propertyUrn
+     * @param propertyLike
      * @param defaultValue
      */
     async getPropertyValue(propertyLike, defaultValue = null) {
@@ -158,14 +154,14 @@ class AbstractService {
         console.info(`[Get] ${urn(propertyLike)} >> ${value}`);
         return value;
     }
-    _buildSetPropertyValueOption(propertyUrn, value) {
+    buildSetPropertyValueOption(propertyUrn, value) {
         const property = this.device.findServiceProperty(this.serviceDefinition, propertyUrn);
         if (!property) {
-            return undefined;
+            throw new Error(`Property not found: ${propertyUrn}`);
         }
         return {
-            piid: property.iid,
             siid: this.serviceDefinition.iid,
+            piid: property.iid,
             value: value
         };
     }
@@ -176,11 +172,7 @@ class AbstractService {
      */
     async setPropertyValue(propertyLike, value) {
         console.info(`[Set] ${urn(propertyLike)} >> ${value}`);
-        const option = this._buildSetPropertyValueOption(urn(propertyLike), value);
-        if (!option) {
-            return undefined;
-        }
-        const res = await this.device.setProperty(option);
+        const res = await this.device.setProperty(this.buildSetPropertyValueOption(urn(propertyLike), value));
         return res[0].value;
     }
     /**
@@ -190,9 +182,8 @@ class AbstractService {
     async setPropertiesValue(urnsValue) {
         const options = [];
         Object.keys(urnsValue).forEach((urn) => {
-            const option = this._buildSetPropertyValueOption(urn, urnsValue[urn]);
-            if (option)
-                options.push(option);
+            const option = this.buildSetPropertyValueOption(urn, urnsValue[urn]);
+            options.push(option);
         });
         await this.device.setProperties(options);
     }

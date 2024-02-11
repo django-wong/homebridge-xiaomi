@@ -1,4 +1,4 @@
-import AbstractService, {Property} from './abstract';
+import AbstractService from './abstract';
 import {Serial_number_00000003} from "../property/serial_number_00000003";
 import {Manufacturer_00000001} from "../property/manufacturer_00000001";
 import {Firmware_Revision_00000005} from "../property/firmware_revision_00000005";
@@ -12,7 +12,7 @@ export class DeviceInformation extends AbstractService{
         return DeviceInformation.urn;
     }
 
-    getRequiredProperties(): Array<Property> {
+    getRequiredProperties() {
         return [
             Serial_number_00000003,
             Manufacturer_00000001,

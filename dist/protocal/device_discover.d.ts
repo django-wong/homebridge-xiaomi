@@ -1,7 +1,7 @@
 /// <reference types="node" />
 import Device from '../device/device';
 import EventEmitter from "events";
-export declare type Event = {
+export type Event = {
     ON_DEVICE: 'on-device';
 };
 export default abstract class DeviceDiscoverProtocal extends EventEmitter {

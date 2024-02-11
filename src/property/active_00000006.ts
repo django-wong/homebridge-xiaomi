@@ -7,12 +7,14 @@ export class Active_00000006 extends On_00000006 {
 
     init() {
         this.getService().getCharacteristic(this.getCharacteristic()).onGet(
-            () => {
-                return this.getPropertyValue();
+            async () => {
+                const value = await this.getPropertyValue();
+                return value ? this.Characteristic.Active.ACTIVE : this.Characteristic.Active.INACTIVE;
             }
         ).onSet(
-            (active) => {
-                return this.setPropertyValue(!!active);
+            async (active) => {
+                await this.setPropertyValue(!!active);
+                return active;
             }
         )
     }

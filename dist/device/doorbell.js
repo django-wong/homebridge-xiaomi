@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class Doorbell extends device_1.default {
 }
-exports.default = Doorbell;
 Doorbell.type = 'urn:miot-spec-v2:device:doorbell:0000A03B';
+exports.default = Doorbell;

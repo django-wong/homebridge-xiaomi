@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class IlluminationSensor extends device_1.default {
 }
-exports.default = IlluminationSensor;
 IlluminationSensor.type = 'urn:miot-spec-v2:device:illumination-sensor:0000A029';
+exports.default = IlluminationSensor;

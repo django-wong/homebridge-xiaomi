@@ -1,5 +1,5 @@
 import { Motor_control_00000038 } from "../property/motor_control_00000038";
-import AbstractService, {AnyHBService, Property} from "./abstract";
+import AbstractService, {AnyHBService} from "./abstract";
 
 export class Airer extends AbstractService {
     static urn = 'urn:miot-spec-v2:service:airer:00007817';
@@ -12,12 +12,12 @@ export class Airer extends AbstractService {
         throw new Error('Not Implemented')
     }
 
-    getDynamicProperties(): Array<Property> {
+    getDynamicProperties() {
         return [
         ];
     }
 
-    getRequiredProperties(): Array<Property> {
+    getRequiredProperties() {
         return [
             Motor_control_00000038
         ]

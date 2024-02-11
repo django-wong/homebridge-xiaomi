@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class WatchWinder extends device_1.default {
 }
-exports.default = WatchWinder;
 WatchWinder.type = 'urn:miot-spec-v2:device:watch-winder:0000A0AF';
+exports.default = WatchWinder;

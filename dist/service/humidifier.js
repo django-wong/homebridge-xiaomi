@@ -6,18 +6,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Humidifier = void 0;
 const abstract_1 = __importDefault(require("./abstract"));
 const active_00000006_1 = require("../property/active_00000006");
-const current_humidifier_dehumidifier_on_1 = require("../property/current_humidifier_dehumidifier_on");
-const target_humidifier_dehumidifier_state_on_1 = require("../property/target_humidifier_dehumidifier_state_on");
+const on_as_current_humidifier_1 = require("../property/on_as_current_humidifier");
+const on_as_target_humidifier_state_1 = require("../property/on_as_target_humidifier_state");
 const humidity_1 = require("./environment/humidity");
 const relative_humidity_0000000C_1 = require("../property/relative_humidity_0000000C");
 const rotation_speed_00000016_1 = require("../property/rotation_speed_00000016");
 class CurrentHumidity extends relative_humidity_0000000C_1.Relative_humidity_0000000C {
-    async getPropertyValue(defaultValue = null) {
+    // @ts-ignore
+    async getPropertyValue(defaultValue) {
         const service = this.service.getAccessory().ofService(humidity_1.Humidity);
-        if (service) {
-            return service.getPropertyValue(this, defaultValue);
-        }
-        return null;
+        return service === null || service === void 0 ? void 0 : service.getPropertyValue(this, defaultValue);
     }
 }
 class Humidifier extends abstract_1.default {
@@ -30,13 +28,15 @@ class Humidifier extends abstract_1.default {
     getRequiredProperties() {
         return [
             active_00000006_1.Active_00000006,
-            current_humidifier_dehumidifier_on_1.CurrentHumidifierDehumidifierOn,
-            target_humidifier_dehumidifier_state_on_1.Target_humidifier_dehumidifier_state_on
+            on_as_current_humidifier_1.OnAsCurrentHumidifier,
+            on_as_target_humidifier_state_1.OnAsTargetHumidifierState
         ];
     }
     getDynamicProperties() {
         const propertis = super.getDynamicProperties();
-        return [...propertis, CurrentHumidity];
+        return [
+            ...propertis, CurrentHumidity
+        ];
     }
     getOptionalProperties() {
         return [

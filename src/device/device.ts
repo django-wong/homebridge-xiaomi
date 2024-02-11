@@ -21,7 +21,7 @@ export enum DeviceEvent {
 export default abstract class Device extends AbstractDevice {
 	static type = 'unknown';
 
-	protected _propertyRefreshTimer?: NodeJS.Timer;
+	protected _propertyRefreshTimer?: NodeJS.Timeout;
 
 	public instanceDefinition: MiIOSpec.InstanceDefinition; // https://miot-spec.org/miot-spec-v2/instances?status=all
 	public instanceFeatureDefinition?: MiIOSpec.Instance; // https://miot-spec.org/miot-spec-v2/instance?type=xxxx
@@ -217,7 +217,7 @@ export default abstract class Device extends AbstractDevice {
 	public async getProperties(properties: GetPropertyOption[]): Promise<GetPropertyResult[]> {
 		let params = properties.map((p) => {
 			return {
-				did: this.config.did || `property-${p.siid}-${p.piid}`, 
+				did: this.config.did || `property-${p.siid}-${p.piid}`,
 				piid: p.piid,
 				siid: p.siid,
 			};

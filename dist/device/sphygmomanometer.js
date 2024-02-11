@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class Sphygmomanometer extends device_1.default {
 }
-exports.default = Sphygmomanometer;
 Sphygmomanometer.type = 'urn:miot-spec-v2:device:sphygmomanometer:0000A07B';
+exports.default = Sphygmomanometer;

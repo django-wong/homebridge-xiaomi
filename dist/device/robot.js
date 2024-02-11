@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class Robot extends device_1.default {
 }
-exports.default = Robot;
 Robot.type = 'urn:miot-spec-v2:device:robot:0000A05D';
+exports.default = Robot;

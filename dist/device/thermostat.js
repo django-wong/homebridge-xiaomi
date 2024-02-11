@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class Thermostat extends device_1.default {
 }
-exports.default = Thermostat;
 Thermostat.type = 'urn:miot-spec-v2:device:thermostat:0000A031';
+exports.default = Thermostat;

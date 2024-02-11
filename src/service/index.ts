@@ -14,7 +14,7 @@ import {Humidifier} from "./humidifier";
 import {Heater} from './heater';
 
 const Services: Service[] = [
-    DeviceInformation, AirConditioner, Light, Environment, FanControl, Battery, AirPurifier, Airer, Speaker, Humidifier, Heater
+    DeviceInformation, AirConditioner, Light, Environment, FanControl, Battery, AirPurifier, Speaker, Humidifier, Heater
 ]
 
 function isEqual(left: any, right: any) {

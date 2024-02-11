@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class CoffeeMachine extends device_1.default {
 }
-exports.default = CoffeeMachine;
 CoffeeMachine.type = 'urn:miot-spec-v2:device:coffee-machine:0000A049';
+exports.default = CoffeeMachine;

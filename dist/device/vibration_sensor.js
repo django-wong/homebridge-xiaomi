@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class VibrationSensor extends device_1.default {
 }
-exports.default = VibrationSensor;
 VibrationSensor.type = 'urn:miot-spec-v2:device:vibration-sensor:0000A09B';
+exports.default = VibrationSensor;

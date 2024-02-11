@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class MagnetSensor extends device_1.default {
 }
-exports.default = MagnetSensor;
 MagnetSensor.type = 'urn:miot-spec-v2:device:magnet-sensor:0000A016';
+exports.default = MagnetSensor;

@@ -2,7 +2,7 @@
 import AbstractDevice from './abstract';
 import MiCloud from '../lib/micloud';
 import InstanceService = MiIOSpec.InstanceService;
-export declare type DeviceConfig = {
+export type DeviceConfig = {
     name?: string;
     did: string;
     model: string;
@@ -23,7 +23,7 @@ export default abstract class Device extends AbstractDevice {
     protected config: DeviceConfig;
     protected miCloudApi: MiCloud;
     static type: string;
-    protected _propertyRefreshTimer?: NodeJS.Timer;
+    protected _propertyRefreshTimer?: NodeJS.Timeout;
     instanceDefinition: MiIOSpec.InstanceDefinition;
     instanceFeatureDefinition?: MiIOSpec.Instance;
     deviceDefinition?: MiIOSpec.Device;

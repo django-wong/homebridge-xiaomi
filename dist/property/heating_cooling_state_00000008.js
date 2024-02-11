@@ -65,12 +65,8 @@ class Heating_cooling_state_00000008 extends abstract_1.default {
                 return this.Characteristic.TargetHeatingCoolingState.COOL;
             case 5:
                 return this.Characteristic.TargetHeatingCoolingState.HEAT;
-            case 4:
-            case 3:
-            case 0:
-                return this.Characteristic.TargetHeatingCoolingState.AUTO;
             default:
-                throw new Error('unsupported');
+                return this.Characteristic.TargetHeatingCoolingState.AUTO;
         }
     }
 }

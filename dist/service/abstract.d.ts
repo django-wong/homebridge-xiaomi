@@ -3,36 +3,32 @@ import Device from "../device/device";
 import InstanceService = MiIOSpec.InstanceService;
 import PrimitiveValue = MiIOSpec.PrimitiveValue;
 import InstanceProperty = MiIOSpec.InstanceProperty;
-import AbstractProperty from "../property/abstract";
+import AbstractProperty, { Property } from "../property/abstract";
 import { WithUUID } from "hap-nodejs/dist/types";
 import { Device as AccessoryContext } from '../lib/micloud';
 import Accessory from "../accessory";
-export declare type AnyHBService = WithUUID<typeof HomeBridgeService>;
-export declare type Property = {
-    urn: string;
-    new (...args: any[]): AbstractProperty;
-};
-declare type PropertyLike = string | AbstractProperty | Property;
+export type AnyHBService = WithUUID<typeof HomeBridgeService>;
+type PropertyLike = string | AbstractProperty | typeof AbstractProperty;
 export default abstract class AbstractService {
     protected accessory: Accessory;
     protected device: Device;
     protected api: API;
     protected serviceDefinition: InstanceService;
     protected services: AbstractService[];
-    properties: AbstractProperty[];
+    properties: Property<any>[];
     constructor(accessory: Accessory, device: Device, api: API, serviceDefinition: InstanceService, services: AbstractService[]);
     abstract urn(): string;
     getDevice(): Device;
     getAccessory(): Accessory;
     getPlatformAccessory(): PlatformAccessory<AccessoryContext>;
-    getRequiredProperties(): Array<Property>;
-    getOptionalProperties(): Array<Property>;
-    getDynamicProperties(): Array<Property>;
+    getRequiredProperties(): Array<typeof AbstractProperty>;
+    getOptionalProperties(): Array<typeof AbstractProperty>;
+    getDynamicProperties(): Array<typeof Property>;
     init(): void;
-    _initDynamicProperties(): void;
-    addProperty(P: Property, definition?: InstanceProperty): void;
-    _initRequiredProperties(): void;
-    _initOptionalProperties(): void;
+    private initDynamicProperties;
+    addProperty(P: any, definition?: InstanceProperty): void;
+    private initRequiredProperties;
+    private initOptionalProperties;
     get hap(): typeof import("hap-nodejs");
     get hbServiceName(): string;
     abstract getHbService(): AnyHBService;
@@ -49,11 +45,11 @@ export default abstract class AbstractService {
     findProperty(propertyUrn: string): InstanceProperty | undefined;
     /**
      * Get property value by URN
-     * @param propertyUrn
+     * @param propertyLike
      * @param defaultValue
      */
     getPropertyValue<T = PrimitiveValue>(propertyLike: PropertyLike, defaultValue?: Nullable<T>): Promise<Nullable<T>>;
-    private _buildSetPropertyValueOption;
+    private buildSetPropertyValueOption;
     /**
      * Set property value by property URN
      * @param propertyLike
@@ -68,7 +64,7 @@ export default abstract class AbstractService {
         [key: string]: PrimitiveValue;
     }): Promise<void>;
 }
-export declare type Service = {
+export type Service = {
     urn: string;
     new (...args: any[]): AbstractService;
 };

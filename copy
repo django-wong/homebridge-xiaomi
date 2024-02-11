@@ -1,0 +1,4 @@
+#!/bin/bash
+
+mkdir -p /opt/homebrew/lib/node_modules/@django-wong/homebridge-xiaomi/
+rsync -av --exclude=".git" ./ /opt/homebrew/lib/node_modules/@django-wong/homebridge-xiaomi/

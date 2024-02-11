@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class Router extends device_1.default {
 }
-exports.default = Router;
 Router.type = 'urn:miot-spec-v2:device:router:0000A036';
+exports.default = Router;

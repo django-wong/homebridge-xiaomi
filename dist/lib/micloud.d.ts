@@ -1,6 +1,6 @@
 import DeviceDiscover from '../protocal/device_discover';
-declare type Nullable<T> = T | null;
-declare type IntBool = 0 | 1;
+type Nullable<T> = T | null;
+type IntBool = 0 | 1;
 export interface Device {
     longitude: string | '0.00000000';
     latitude: string | '0.00000000';
@@ -41,7 +41,7 @@ export interface Device {
         [key: string]: any;
     };
 }
-export declare type MiCloudConstructOptions = {
+export type MiCloudConstructOptions = {
     debug?: boolean;
     country?: string;
 };

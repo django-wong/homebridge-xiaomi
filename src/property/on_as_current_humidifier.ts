@@ -1,10 +1,10 @@
 import AbstractProperty from './abstract';
 
-export class CurrentHumidifierDehumidifierOn extends AbstractProperty {
+export class OnAsCurrentHumidifier extends AbstractProperty {
 	static urn = 'urn:miot-spec-v2:property:on:00000006';
 
     urn(): string {
-        return CurrentHumidifierDehumidifierOn.urn;
+        return OnAsCurrentHumidifier.urn;
     }
 
     init(): void {
@@ -17,10 +17,6 @@ export class CurrentHumidifierDehumidifierOn extends AbstractProperty {
 					return this.Characteristic.CurrentHumidifierDehumidifierState.IDLE;
 				}
         	}
-        ).setProps({
-        	minValue: 1,
-        	maxValue: 2,
-			minStep: 1
-        })
+        )
     }
 }

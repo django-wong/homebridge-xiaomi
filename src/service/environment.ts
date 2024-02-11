@@ -1,4 +1,4 @@
-import AbstractService, {Property} from "./abstract";
+import AbstractService from "./abstract";
 import {Service} from "homebridge";
 import {CurrentTemperature_00000020} from "../property/current_temperature_00000020";
 import {Relative_humidity_0000000C} from "../property/relative_humidity_0000000C";

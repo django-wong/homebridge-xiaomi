@@ -1,4 +1,4 @@
-import AbstractService, {AnyHBService, Property} from "./abstract";
+import AbstractService, {AnyHBService} from "./abstract";
 import {Mute_00000040} from "../property/mute_00000040";
 import {Volume_00000013} from "../property/volume_00000013";
 
@@ -9,7 +9,7 @@ export class Speaker extends AbstractService {
         return this.hap.Service.Speaker;
     }
 
-    getRequiredProperties(): Array<Property> {
+    getRequiredProperties() {
         return [
             Mute_00000040,
             Volume_00000013

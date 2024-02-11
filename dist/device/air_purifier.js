@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class AirPurifier extends device_1.default {
 }
-exports.default = AirPurifier;
 AirPurifier.type = 'urn:miot-spec-v2:device:air-purifier:0000A007';
+exports.default = AirPurifier;

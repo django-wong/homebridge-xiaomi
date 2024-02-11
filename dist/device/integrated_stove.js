@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class IntegratedStove extends device_1.default {
 }
-exports.default = IntegratedStove;
 IntegratedStove.type = 'urn:miot-spec-v2:device:integrated-stove:0000A056';
+exports.default = IntegratedStove;

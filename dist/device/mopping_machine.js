@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class MoppingMachine extends device_1.default {
 }
-exports.default = MoppingMachine;
 MoppingMachine.type = 'urn:miot-spec-v2:device:mopping-machine:0000A064';
+exports.default = MoppingMachine;

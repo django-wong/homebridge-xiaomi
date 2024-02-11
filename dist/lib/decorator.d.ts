@@ -8,7 +8,7 @@ export declare function RequiredProperties<T extends {
 }>(propertiesConstructors: AbstractProperty[]): (target: T) => {
     new (...args: any[]): {
         [x: string]: any;
-        [REQUIRED_PROPERTIES]: AbstractProperty<MiIOSpec.PrimitiveValue>[];
+        [REQUIRED_PROPERTIES]: AbstractProperty<any>[];
     };
 } & T;
 export declare function OptionalProperties<T extends {
@@ -16,6 +16,6 @@ export declare function OptionalProperties<T extends {
 }>(propertiesConstructors: AbstractProperty[]): (target: T) => {
     new (...args: any[]): {
         [x: string]: any;
-        [OPTIONAL_PROPERTIES]: AbstractProperty<MiIOSpec.PrimitiveValue>[];
+        [OPTIONAL_PROPERTIES]: AbstractProperty<any>[];
     };
 } & T;

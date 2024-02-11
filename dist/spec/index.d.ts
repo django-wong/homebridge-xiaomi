@@ -1,11 +1,11 @@
-import { RequestInit, Response } from 'node-fetch';
+import fetch, { RequestInit } from 'node-fetch';
 /**
  * Make a request to the Spec
  *
  * @param      {string}       path                  The path
  * @param      {RequestInit}  options?:RequestInit  The options request initialize
  */
-export declare function request<T = {}>(path: string, options?: RequestInit): Promise<Response>;
+export declare function request<T = {}>(path: string, options?: RequestInit): Promise<fetch.Response>;
 /**
  * Finds an instance by model.
  *

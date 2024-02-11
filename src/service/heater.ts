@@ -1,4 +1,4 @@
-import AbstractService, { AnyHBService, Property } from "./abstract";
+import AbstractService, {AnyHBService} from "./abstract";
 import {On_00000006} from "../property/on_00000006";
 import {Environment} from "./environment";
 import {CurrentTemperature_00000020} from "../property/current_temperature_00000020";
@@ -22,7 +22,7 @@ export class Heater extends AbstractService {
         return Heater.urn;
     }
 
-    getRequiredProperties(): Array<Property> {
+    getRequiredProperties() {
         return this.canActAsThermostat ? [] : [
             On_00000006,
         ];
@@ -39,15 +39,6 @@ export class Heater extends AbstractService {
      * Current and target state can be only HEAT or OFF
      */
     initHeatingCoolingState() {
-        this.getService().getCharacteristic(this.api.hap.Characteristic.CurrentHeatingCoolingState).onGet(
-            async () => {
-                const value = await this.getPropertyValue(On_00000006);
-                return value
-                    ? this.api.hap.Characteristic.CurrentHeatingCoolingState.HEAT
-                    : this.api.hap.Characteristic.CurrentHeatingCoolingState.OFF;
-            }
-        );
-
         this.getService().getCharacteristic(this.api.hap.Characteristic.TargetHeatingCoolingState).onSet(
             async () => {
                 const value = await this.getPropertyValue(On_00000006);
@@ -57,11 +48,16 @@ export class Heater extends AbstractService {
             }
         ).onSet(
             async (value) => {
-                await this.setPropertyValue(On_00000006, value > 0);
+                await this.setPropertyValue(On_00000006, !!value);
             }
         ).setProps({
-            minValue: 0,
-            maxValue: 1, minStep: 1,
+            minValue: this.hap.Characteristic.TargetHeatingCoolingState.OFF,
+            maxValue: this.hap.Characteristic.TargetHeatingCoolingState.HEAT,
+            minStep: 1,
+            validValues: [
+                this.hap.Characteristic.TargetHeatingCoolingState.OFF,
+                this.hap.Characteristic.TargetHeatingCoolingState.HEAT
+            ]
         })
     }
 
@@ -88,15 +84,13 @@ export class Heater extends AbstractService {
                 if (environment) {
                     return environment.getPropertyValue(CurrentTemperature_00000020);
                 }
-                const value = await this.getPropertyValue('urn:miot-spec-v2:property:target-temperature:00000021');
-                return value;
+                return await this.getPropertyValue('urn:miot-spec-v2:property:target-temperature:00000021');
             }
         )
 
         this.getService().getCharacteristic(this.api.hap.Characteristic.TargetTemperature).onGet(
             async () => {
-                const value = await this.getPropertyValue('urn:miot-spec-v2:property:target-temperature:00000021');
-                return value;
+                return await this.getPropertyValue('urn:miot-spec-v2:property:target-temperature:00000021');
             }
         ).onSet(
             async (value) => {

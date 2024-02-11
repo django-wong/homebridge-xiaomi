@@ -1,21 +1,19 @@
-import AbstractService, {AnyHBService, Property} from "./abstract";
+import AbstractService, {AnyHBService} from "./abstract";
 import {Active_00000006} from "../property/active_00000006";
-import {CurrentHumidifierDehumidifierOn} from "../property/current_humidifier_dehumidifier_on";
-import {Target_humidifier_dehumidifier_state_on} from "../property/target_humidifier_dehumidifier_state_on";
+import {OnAsCurrentHumidifier} from "../property/on_as_current_humidifier";
+import {OnAsTargetHumidifierState} from "../property/on_as_target_humidifier_state";
 import {CurrentTemperature_00000020} from "../property/current_temperature_00000020";
-import {Service} from "homebridge";
+import {Nullable, Service} from "homebridge";
 import {Humidity} from "./environment/humidity";
 import PrimitiveValue = MiIOSpec.PrimitiveValue;
 import {Relative_humidity_0000000C} from "../property/relative_humidity_0000000C";
 import { Rotation_speed_00000016 } from "../property/rotation_speed_00000016";
 
 class CurrentHumidity extends Relative_humidity_0000000C {
-    async getPropertyValue(defaultValue: Nullable<number> = null): Promise<Nullable<number>> {
+    // @ts-ignore
+    async getPropertyValue(defaultValue: any) {
         const service = this.service.getAccessory().ofService(Humidity);
-        if (service) {
-            return service.getPropertyValue<number>(this, defaultValue);
-        }
-        return null;
+        return service?.getPropertyValue<number>(this, defaultValue);
     }
 }
 
@@ -30,20 +28,22 @@ export class Humidifier extends AbstractService {
         return this.hap.Service.HumidifierDehumidifier;
     }
 
-    getRequiredProperties(): Array<Property> {
+    getRequiredProperties() {
         return [
             Active_00000006,
-            CurrentHumidifierDehumidifierOn,
-            Target_humidifier_dehumidifier_state_on
+            OnAsCurrentHumidifier,
+            OnAsTargetHumidifierState
         ];
     }
 
-    getDynamicProperties(): Array<Property> {
+    getDynamicProperties() {
         const propertis = super.getDynamicProperties();
-        return [...propertis, CurrentHumidity];
+        return [
+            ...propertis, CurrentHumidity
+        ];
     }
 
-    getOptionalProperties(): Property[] {
+    getOptionalProperties() {
         return [
             Rotation_speed_00000016
         ];

@@ -16,8 +16,14 @@ var MiCloudEvent;
     MiCloudEvent["LOGGED_IN"] = "logged-in";
     MiCloudEvent["LOGGED_OUT"] = "logged-out";
     MiCloudEvent["COUNTRY_CHANGED"] = "country-changed";
-})(MiCloudEvent = exports.MiCloudEvent || (exports.MiCloudEvent = {}));
+})(MiCloudEvent || (exports.MiCloudEvent = MiCloudEvent = {}));
 class MiCloud extends device_discover_1.default {
+    onDeviceAvailable(callback) {
+        throw new Error('Method not implemented.');
+    }
+    discoverDevices() {
+        throw new Error('Method not implemented.');
+    }
     constructor(options) {
         var _a;
         super();
@@ -46,12 +52,6 @@ class MiCloud extends device_discover_1.default {
             charset: 'alphabetic',
             capitalization: 'uppercase',
         });
-    }
-    onDeviceAvailable(callback) {
-        throw new Error('Method not implemented.');
-    }
-    discoverDevices() {
-        throw new Error('Method not implemented.');
     }
     isLoggedIn() {
         return !!this.serviceToken;
@@ -128,7 +128,6 @@ class MiCloud extends device_discover_1.default {
         this.logger.deepDebug(`MiCloud request ${url} - ${JSON.stringify(body)}`);
         const res = await (0, node_fetch_1.default)(url, {
             method: 'POST',
-            timeout: this.requestTimeout,
             headers: {
                 'User-Agent': this.userAgent,
                 'x-xiaomi-protocal-flag-cli': 'PROTOCAL-HTTP2',

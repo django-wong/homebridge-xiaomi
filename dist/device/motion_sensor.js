@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class MotionSensor extends device_1.default {
 }
-exports.default = MotionSensor;
 MotionSensor.type = 'urn:miot-spec-v2:device:motion-sensor:0000A014';
+exports.default = MotionSensor;

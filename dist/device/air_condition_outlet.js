@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class AirConditionOutlet extends device_1.default {
 }
-exports.default = AirConditionOutlet;
 AirConditionOutlet.type = 'urn:miot-spec-v2:device:air-condition-outlet:0000A045';
+exports.default = AirConditionOutlet;

@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class Clock extends device_1.default {
 }
-exports.default = Clock;
 Clock.type = 'urn:miot-spec-v2:device:clock:0000A026';
+exports.default = Clock;

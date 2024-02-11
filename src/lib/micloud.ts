@@ -190,7 +190,7 @@ export default class MiCloud extends DeviceDiscover {
     this.login(this.username!, this.password!);
   }
 
-  public async request(path: string, data: Record<string, any>) {
+  public async request(path: string, data: Record<string, any>): Promise<any> {
     if (!this.isLoggedIn()) {
       throw new Error('You are not logged in! Cannot make a request!');
     }
@@ -210,7 +210,6 @@ export default class MiCloud extends DeviceDiscover {
     this.logger.deepDebug(`MiCloud request ${url} - ${JSON.stringify(body)}`);
     const res = await fetch(url, {
       method: 'POST',
-      timeout: this.requestTimeout,
       headers: {
         'User-Agent': this.userAgent,
         'x-xiaomi-protocal-flag-cli': 'PROTOCAL-HTTP2',

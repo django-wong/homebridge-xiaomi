@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class Televsion extends device_1.default {
 }
-exports.default = Televsion;
 Televsion.type = 'urn:miot-spec-v2:device:television:0000A010';
+exports.default = Televsion;

@@ -6,5 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const device_1 = __importDefault(require("./device"));
 class Relay extends device_1.default {
 }
-exports.default = Relay;
 Relay.type = 'urn:miot-spec-v2:device:relay:0000A03D';
+exports.default = Relay;
