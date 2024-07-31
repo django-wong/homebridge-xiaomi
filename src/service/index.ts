@@ -7,14 +7,14 @@ import {FanControl} from "./fan_control";
 import {Environment} from "./environment";
 import {Battery} from "./battery";
 import {AirPurifier} from "./air_purifier";
-import {Airer} from "./airer";
 import {Speaker} from "./speaker";
 import {Service} from "./abstract";
 import {Humidifier} from "./humidifier";
 import {Heater} from './heater';
+import {Fan} from "./fan";
 
 const Services: Service[] = [
-    DeviceInformation, AirConditioner, Light, Environment, FanControl, Battery, AirPurifier, Speaker, Humidifier, Heater
+    DeviceInformation, AirConditioner, Light, Environment, FanControl, Fan, Battery, AirPurifier, Speaker, Humidifier, Heater
 ]
 
 function isEqual(left: any, right: any) {
